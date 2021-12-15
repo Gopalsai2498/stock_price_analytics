@@ -23,12 +23,14 @@ def data_load():
     
     data['expiry_dt'] = pd.to_datetime(data['expiry_dt'])
     
+    #data = data.drop(['Unnamed: 0', 'Unnamed: 15'], axis=1)
+    
     return data
 
 df = data_load()
 
 def show_calls_page():
-    st.title('calls information')
+    st.markdown('**select the following details to fetch info for Calls**')
             
     symbols = ['AARTIIND', 'ABBOTINDIA', 'ABFRL']
     
@@ -63,7 +65,7 @@ def show_calls_page():
         
         #fig = px.line(data)
         
-        fig = px.line(data, x="date", y="open_int", title='open int', )
+        fig = px.line(data, x="date", y="open_int", title=symbols, )
         
         st.write(fig)
         
