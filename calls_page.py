@@ -23,7 +23,7 @@ def data_load():
     
     data['expiry_dt'] = pd.to_datetime(data['expiry_dt'])
     
-    #data = data.drop(['Unnamed: 0', 'Unnamed: 15'], axis=1)
+    #data = data.drop(['Unnamed: 0', 'unnamed: 15', 'option_typ', 'symbol', 'expiry_dt', 'strike_pr'], axis=1)
     
     return data
 
@@ -55,6 +55,8 @@ def show_calls_page():
         
         df = df[(df['symbol']==symbols) & (df['expiry_dt']==expiry_date) & (df['strike_pr']==strike_price)]
         
+        df= df.drop(['Unnamed: 0', 'unnamed: 15', 'option_typ', 'symbol', 'expiry_dt', 'strike_pr'], axis=1).reset_index(drop=True)
+        
         st.write(df.head())
         
         st.write("""### fetching data with increasing trend of Open interest""")
@@ -65,7 +67,7 @@ def show_calls_page():
         
         #fig = px.line(data)
         
-        fig = px.line(data, x="date", y="open_int", title=symbols, )
+        fig = px.line(data, x="date", y="open_int", title=symbols)
         
         st.write(fig)
         
